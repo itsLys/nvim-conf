@@ -1,0 +1,14 @@
+require("config")
+
+vim.api.nvim_create_autocmd("TextYankPost", {
+	desc = "Highlight when yanking text",
+	group = vim.api.nvim_create_augroup("highlight yank", {clear = true}),
+	callback = function ()
+		vim.highlight.on_yank()
+	end
+
+})
+
+vim.cmd.colorscheme "nightfly"
+vim.cmd.highlight "EndOfBuffer guibg=NONE guifg=bg"
+-- vim.cmd.highlight "EndOfBuffer ctermbg=NONE guibg=NONE guifg=bg ctermfg=bg"
