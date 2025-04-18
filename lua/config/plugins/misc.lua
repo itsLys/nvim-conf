@@ -1,4 +1,5 @@
 return {
+	{ "Bilal2453/luvit-meta", lazy = false },
 	{
 		"numToStr/Comment.nvim",
 		config = function()

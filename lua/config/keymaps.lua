@@ -70,7 +70,7 @@ set(
 
 set("n", "<leader>%", ":so<CR>", { desc = "Source Current File" })
 
-set("n", "<leader>42", ":source ~/.config/nvim/lua/config/strheader.vim<CR>:Stdheader<CR>", { desc = "42 header" })
+set("n", "<leader>42", ":source ~/.config/nvim/lua/config/stdheader.vim<CR>:Stdheader<CR>", { desc = "42 header" })
 
 -- Disable autoformatting on save
 set("n", "<leader>cd", ":FormatDisable<CR>", { desc = "Disable Autoformatting" })

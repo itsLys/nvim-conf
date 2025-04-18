@@ -1,3 +1,4 @@
+local actions = require("telescope.actions")
 local setup = require("telescope").setup
 return {
 	'nvim-telescope/telescope.nvim',
@@ -10,6 +11,13 @@ return {
 		setup({
 			defaults = {
 				initial_mode = "normal",
+				mappings = {
+					-- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+					i = {
+						["<C-j>"] = actions.move_selection_next,
+						["<C-k>"] = actions.move_selection_previous,
+					},
+				},
 			},
 			extensions = {
 				fzf = {},
@@ -36,6 +44,17 @@ return {
 		map("n", "<leader>s.", builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
 		map("n", "<leader><leader>", builtin.buffers, { desc = "[ ] Find existing buffers" })
 		-- custom
+		map("n", "<leader>sm", themed_picker("man_pages", "get_ivy", {
+				initial_mode = "insert",
+				sections = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+				winblend = 10,
+				previewer = true,
+				layout_config = {
+					width = 170,
+					height = 25,
+				},
+			}),
+			{ desc = "[S]earch [M]an pages" })
 		map("n", "<leader>/", themed_picker("current_buffer_fuzzy_find", "get_dropdown", {
 				winblend = 10,
 				previewer = false,
