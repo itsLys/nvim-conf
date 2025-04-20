@@ -31,8 +31,7 @@ return {
 				italic = true,
 			})
 			vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", {
-				fg = colors.tan,
-				bg = colors.bg,
+				fg = colors.grey,
 				italic = true,
 			})
 		end

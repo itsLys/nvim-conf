@@ -25,22 +25,5 @@ return {
 	},
 	{
 		"Bekaboo/deadcolumn.nvim",
-		config = function()
-			local opts = {
-				scope = "line", ---@type string|fun(): integer
-				---@type string[]|fun(mode: string): boolean
-				modes = function(mode)
-					return mode:find("^[ictRss\x13]") ~= nil
-				end,
-				warning = {
-					alpha = 0.4,
-					offset = 0,
-					colorcode = "#000B12",
-					hlgroup = { "Error", "bg" },
-				},
-			}
-
-			require("deadcolumn").setup(opts) -- Call the setup function
-		end,
 	},
 }

@@ -22,7 +22,16 @@ return {
 			-- 	underline = true,
 			-- 	update_in_insert = false,
 			-- })
-			require("lspconfig").clangd.setup { capabilities = capapilities }
+			require("lspconfig").clangd.setup {
+				capabilities = capapilities,
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=never",
+					"--fallback-style=microsoft",
+				},
+			}
 			require("lspconfig").lua_ls.setup { capabilities = capapilities }
 			vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format() end)
 			-- NOTE: read :help ins-completion
