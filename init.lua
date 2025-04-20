@@ -9,7 +9,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 
 })
 
-vim.cmd.colorscheme "nightfly"
 vim.cmd.highlight "EndOfBuffer guibg=NONE guifg=bg"
 vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"

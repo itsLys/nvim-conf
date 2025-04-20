@@ -21,7 +21,21 @@ return {
 		"bluz71/vim-nightfly-colors",
 		name = "nightfly",
 		lazy = false,
-		priority = 1000
+		priority = 1000,
+		config = function()
+			vim.cmd.colorscheme "nightfly"
+			local colors = require("nightfly").palette
+			vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", {
+				fg = colors.watermelon,
+				bg = colors.black_blue,
+				italic = true,
+			})
+			vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", {
+				fg = colors.tan,
+				bg = colors.bg,
+				italic = true,
+			})
+		end
 	},
 
 }

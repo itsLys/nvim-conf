@@ -16,12 +16,12 @@ return {
 		},
 		config = function()
 			local capapilities = require('blink.cmp').get_lsp_capabilities()
-			vim.diagnostic.config({
-				virtual_text = true,
-				signs = true,
-				underline = true,
-				update_in_insert = false,
-			})
+			-- vim.diagnostic.config({
+			-- 	virtual_text = true,
+			-- 	signs = true,
+			-- 	underline = true,
+			-- 	update_in_insert = false,
+			-- })
 			require("lspconfig").clangd.setup { capabilities = capapilities }
 			require("lspconfig").lua_ls.setup { capabilities = capapilities }
 			vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format() end)
