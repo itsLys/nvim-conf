@@ -1,5 +1,3 @@
-local actions = require("telescope.actions")
-local setup = require("telescope").setup
 return {
 	'nvim-telescope/telescope.nvim',
 	tag = '0.1.8',
@@ -8,9 +6,20 @@ return {
 		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 	},
 	config = function()
+		local map = vim.keymap.set
+		local setup = require("telescope").setup
+		local actions = require("telescope.actions")
+		local builtin = require("telescope.builtin")
+		local themse = require("telescope.themes")
+		local themed_picker = function(picker, theme, params)
+			return function()
+				local opts = themse[theme](params)
+				builtin[picker](opts)
+			end
+		end
 		setup({
 			defaults = {
-				initial_mode = "normal",
+				initial_mode = "insert",
 				mappings = {
 					-- i = { ['<c-enter>'] = 'to_fuzzy_refine' },
 					i = {
@@ -25,15 +34,6 @@ return {
 		})
 		require('telescope').load_extension('fzf')
 
-		local builtin = require("telescope.builtin")
-		local map = vim.keymap.set
-		local themse = require("telescope.themes")
-		local themed_picker = function(picker, theme, params)
-			return function()
-				local opts = themse[theme](params)
-				builtin[picker](opts)
-			end
-		end
 		map("n", "<leader>sh", builtin.help_tags, { desc = "[S]earch [H]elp" })
 		map("n", "<leader>sf", builtin.find_files, { desc = "[S]earch [F]iles" })
 		map("n", "<leader>ss", builtin.builtin, { desc = "[S]earch [S]elect Telescope" })
@@ -46,11 +46,10 @@ return {
 		-- custom
 		map("n", "<leader>sm", themed_picker("man_pages", "get_ivy", {
 				initial_mode = "insert",
-				sections = { "1", "2", "3", "4", "5", "6", "7", "8", "9" },
+				sections = { "ALL" },
 				winblend = 10,
 				previewer = true,
 				layout_config = {
-					width = 170,
 					height = 25,
 				},
 			}),
@@ -88,9 +87,9 @@ return {
 		map("n", "<leader>sp", function()
 			builtin.find_files({
 				cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy"),
-				prompt_title = "[S]earch [P]ackages",
+				prompt_title = "Search Packages",
 			})
-		end, { desc = "[S]earch [/] in Open Files" })
+		end, { desc = "[S]earch [P]ackages" })
 	end
 
 }

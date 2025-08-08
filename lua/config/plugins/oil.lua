@@ -25,6 +25,8 @@ return {
 					["<C-h>"] = false,
 					["<C-l>"] = false,
 					["<C-s>"] = false,
+					["<C-d>"] = "actions.preview_scroll_down",
+					["<C-u>"] = "actions.preview_scroll_up",
 					["<leader><C-s>"] = {
 						"actions.select",
 						opts = { vertical = true },
@@ -59,6 +61,8 @@ return {
 			vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open Explorer" })
 			vim.keymap.set("n", "<leader>--", require("oil").toggle_float)
 			vim.keymap.set("n", "<leader>--", require("oil").toggle_float)
+			-- vim.keymap.set("n", "<C-d>", require("oil.actions").preview_scroll_down)
+			-- vim.keymap.set("n", "<C-u>", require("oil.actions").preview_scroll_up)
 		end,
 	}
 }

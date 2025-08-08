@@ -10,6 +10,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.cmd.highlight "EndOfBuffer guibg=NONE guifg=bg"
+vim.cmd.highlight "background guibg=fg guifg=bg"
+vim.cmd("highlight Normal guibg=#15141f")
 vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"
 vim.cmd('filetype plugin on')
