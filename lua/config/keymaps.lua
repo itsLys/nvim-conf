@@ -79,3 +79,10 @@ set("n", "<leader>ce", ":FormatEnable<CR>", { desc = "Enable Autoformatting" })
 
 set("n", "<leader>bo", ":%bufdo if bufnr('%') != bufnr('$') | bdelete | endif", { desc = "Close other buffers" })
 set("n", "<leader>bs", ":bdelete ", { desc = "Close specific buffer (enter buffer number)" })
+
+-- sessionizer
+set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+set("n", "<M-h>", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
+set("n", "<M-t>", "<cmd>silent !tmux neww tmux-sessionizer -s 1<CR>")
+set("n", "<M-n>", "<cmd>silent !tmux neww tmux-sessionizer -s 2<CR>")
+set("n", "<M-s>", "<cmd>silent !tmux neww tmux-sessionizer -s 3<CR>")
