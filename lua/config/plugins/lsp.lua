@@ -42,10 +42,12 @@ return {
 			lspconfig.lua_ls.setup({capapilities = capapilities})
 			lspconfig.ts_ls.setup({capapilities = capapilities})
 			lspconfig.html.setup({capapilities = capapilities})
-			lspconfig.cssls.setup({capapilities = capapilities})
+			lspconfig.cssls.setup({
+				capapilities = capapilities,
+				-- filetypes = {"css"}
+			})
 			lspconfig.jsonls.setup({capapilities = capapilities})
 			lspconfig.yamlls.setup({capapilities = capapilities})
-			lspconfig.cssls.setup({capapilities = capapilities})
 			vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format() end)
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
