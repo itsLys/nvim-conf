@@ -6,7 +6,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function ()
 		vim.highlight.on_yank()
 	end
-
 })
 
 vim.cmd.highlight "EndOfBuffer guibg=NONE guifg=bg"
@@ -16,5 +15,11 @@ vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"
 vim.cmd('filetype plugin on')
 vim.cmd('runtime! plugin/man.vim')
+vim.o.selectmode = "mouse,key"
 
+vim.keymap.set('s', 'p', function()
+  return 'p'
+end, {expr = true, noremap = true})
+-- or simpler:
+vim.api.nvim_set_keymap('s', 'p', 'p', {noremap = true, silent = true})
 -- vim.cmd.highlight "EndOfBuffer ctermbg=NONE guibg=NONE guifg=bg ctermfg=bg"

@@ -1,4 +1,6 @@
 return {
+
+	{ 'aca/emmet-ls' },
 	{
 		'saghen/blink.cmp',
 		dependencies = { 'rafamadriz/friendly-snippets' },
@@ -6,7 +8,7 @@ return {
 		opts = {
 			-- See :h blink-cmp-config-keymap for defining your own keymap
 			keymap = {
-				preset = 'default',
+				preset = 'none',
 				['<M-j>'] = { 'select_next', 'fallback' },
 				['<M-k>'] = { 'select_prev', 'fallback' },
 				['<S-Tab>'] = { 'select_and_accept' },

@@ -22,7 +22,8 @@ return {
 				underline = true,
 				update_in_insert = false,
 			})
-			require("lspconfig").clangd.setup {
+			local lspconfig = require("lspconfig");
+			lspconfig.clangd.setup {
 				capabilities = capapilities,
 				cmd = {
 					"clangd",
@@ -32,13 +33,26 @@ return {
 					"--fallback-style=microsoft",
 				},
 			}
-			require("lspconfig").lua_ls.setup { capabilities = capapilities }
+			lspconfig.emmet_ls.setup({
+				capapilities = capapilities,
+				filetypes = {
+					"html", "css", "scss", "javascriptreact", "typescriptreact", "svelte", "vue", "javascript", "typescript",
+				},
+			})
+			lspconfig.lua_ls.setup({capapilities = capapilities})
+			lspconfig.ts_ls.setup({capapilities = capapilities})
+			lspconfig.html.setup({capapilities = capapilities})
+			lspconfig.cssls.setup({capapilities = capapilities})
+			lspconfig.jsonls.setup({capapilities = capapilities})
+			lspconfig.yamlls.setup({capapilities = capapilities})
+			lspconfig.cssls.setup({capapilities = capapilities})
 			vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format() end)
-			-- NOTE: read :help ins-completion
-			-- :help lsp
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight", { clear = false })
+					local create_autocmd = vim.api.nvim_create_autocmd
 					local map = function(keys, func, desc)
 						vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 					end
@@ -51,25 +65,18 @@ return {
 					map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 					map("<leader>D", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
 					map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-
-					--  TODO: See `:help CursorHold` for information about when this is executed
-					local client = vim.lsp.get_client_by_id(event.data.client_id)
 					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-						local highlight_augroup = vim.api.nvim_create_augroup("kickstart-lsp-highlight",
-							{ clear = false })
-						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+						create_autocmd({ "CursorHold", "CursorHoldI" }, {
 							buffer = event.buf,
 							group = highlight_augroup,
 							callback = vim.lsp.buf.document_highlight,
 						})
-
-						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+						create_autocmd({ "CursorMoved", "CursorMovedI" }, {
 							buffer = event.buf,
 							group = highlight_augroup,
 							callback = vim.lsp.buf.clear_references,
 						})
-
-						vim.api.nvim_create_autocmd("LspDetach", {
+						create_autocmd("LspDetach", {
 							group = vim.api.nvim_create_augroup("kickstart-lsp-detach", { clear = true }),
 							callback = function(event2)
 								vim.lsp.buf.clear_references()
